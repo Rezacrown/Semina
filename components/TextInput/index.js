@@ -7,6 +7,8 @@ export default function TextInput({
   placeholder,
   value,
   label,
+  keydown,
+  onSubmit,
 }) {
   return (
     <div className="d-flex flex-column align-items-start">
@@ -18,6 +20,8 @@ export default function TextInput({
         name={name}
         value={value}
         onChange={onChange}
+        onKeyDown={keydown}
+        onSubmit={onSubmit}
       />
     </div>
   );

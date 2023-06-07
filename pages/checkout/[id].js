@@ -13,11 +13,6 @@ export default function Checkout({ detailPage }) {
   const router = useRouter();
   const ticketId = useSearchParams().get('ticketId')
 
-
-
-    console.log('data >>>>>>>>>>>>>')
-    console.log(ticketId)
-
   return (
     <>
       <Head>

@@ -39,7 +39,7 @@ export default function Navbar() {
     <nav className="container navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
         <Link href={"/"} className="navbar-brand">
-          <Image src="/images/logo.svg" alt="semina" />
+          <Image src="/images/logo.svg" alt="semina" width='100' height='80' />
         </Link>
         <button
           className="navbar-toggler"
@@ -81,7 +81,7 @@ export default function Navbar() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <Image src="/images/avatar.png" alt="semina" width="60" />
+                      <Image src="/images/avatar.png" alt="semina" width="60" height='60' />
                     </a>
 
                     <a
@@ -92,7 +92,7 @@ export default function Navbar() {
                       aria-expanded="false"
                       aria-controls="collapseExample"
                     >
-                      <Image src="/images/avatar.png" alt="semina" width="60" />
+                      <Image src="/images/avatar.png" alt="semina" width="60" height='60' />
                     </a>
 
                     <ul

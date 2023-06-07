@@ -6,7 +6,7 @@ export default function Custom404({ statusCode }) {
 }
 
 Custom404.getInitialProps = ({ res, err }) => {
-  const statusCode = res?.statusCode || err?.statusCode || 404;
+  const statusCode = res?.statusCode || err?.statusCode;
   return { statusCode};
 };
 

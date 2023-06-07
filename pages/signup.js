@@ -43,6 +43,7 @@ export default function Signin() {
 }
 
 export async function getServerSideProps(context) {
+
   const { token } = context.req.cookies;
 
   if (token) {

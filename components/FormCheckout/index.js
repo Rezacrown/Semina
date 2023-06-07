@@ -13,9 +13,7 @@ export default function FormCheckout({ tickets }) {
     const ticketId = searchParams.get('ticketId')
     const organizer = searchParams.get('organizer')
     const id = searchParams.get('id')
-    
-    console.log('data >>>>')
-    console.log(organizer)
+  
 
   const [form, setForm] = useState({
     email: "",
@@ -27,9 +25,6 @@ export default function FormCheckout({ tickets }) {
   });
 
   const [payments, setPayments] = useState([]);
-
-//   console.log("payments");
-//   console.log(payments);
 
   useEffect(() => {
     const fetctData = async () => {

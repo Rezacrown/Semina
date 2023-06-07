@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 export default function FormSignin() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const keyword = searchParams.get('keyword')
+  const keyword = searchParams.get("keyword");
 
 
   const [otp, setOtp] = useState("");
@@ -27,11 +27,11 @@ export default function FormSignin() {
 
   const handleSubmit = async () => {
     if (keyword === "otp") {
-      putData("api/v1/active", {
+      await putData("/api/v1/active", {
         otp: otp,
         email: form.email,
       }).then((res) => {
-        if (res.data) {
+        if (res?.data) {
           toast.success("berhasil aktipkan akun", {
             position: "top-right",
             autoClose: 5000,
@@ -45,8 +45,8 @@ export default function FormSignin() {
         }
       });
     } else {
-      postData("api/v1/auth/signup", form).then((res) => {
-        if (res.data) {
+      postData("/api/v1/auth/signup", form).then((res) => {
+        if (res?.data) {
           toast.success("berhasil signup", {
             position: "top-right",
             autoClose: 5000,
@@ -74,6 +74,7 @@ export default function FormSignin() {
           onChange={(e) => {
             setOtp(e.target.value);
           }}
+          onSubmit={handleSubmit}
         />
       ) : (
         <>
