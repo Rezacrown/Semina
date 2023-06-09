@@ -1,5 +1,5 @@
 // import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../Button";
 import TextInput from "../TextInput";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,8 +11,9 @@ export default function FormSignin() {
   const searchParams = useSearchParams();
   const keyword = searchParams.get("keyword");
 
-
+  const [isLoading, setIsLoading] = useState(false)
   const [otp, setOtp] = useState("");
+  const [stackOtp, setStatckOtp] = useState(0)
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -21,12 +22,32 @@ export default function FormSignin() {
     role: "",
   });
 
+
+  useEffect(() => {
+    if (stackOtp >= 3) {
+      toast.error("Kode Otp 3x Salah tolong signup ulang", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setStatckOtp(0)
+      setTimeout(() => {
+        router.push("/signup");
+      }, 3000);
+    }
+  }, [stackOtp]);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
     if (keyword === "otp") {
+      setIsLoading(true)
       await putData("/api/v1/active", {
         otp: otp,
         email: form.email,
@@ -41,10 +62,17 @@ export default function FormSignin() {
             draggable: true,
             progress: undefined,
           });
+          setIsLoading(false)
           router.push("/signin");
         }
-      });
+      }).catch((err) => {
+        console.log(stackOtp)
+        setStatckOtp(stackOtp + 1);
+        setIsLoading(false)
+      }
+      )
     } else {
+       setIsLoading(true)
       postData("/api/v1/auth/signup", form).then((res) => {
         if (res?.data) {
           toast.success("berhasil signup", {
@@ -56,9 +84,17 @@ export default function FormSignin() {
             draggable: true,
             progress: undefined,
           });
+           setIsLoading(false)
           router.push({ pathname: "/signup", query: { keyword: "otp" } });
         }
-      });
+      }).catch((err)=>  setIsLoading(false))
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit()
     }
   };
 
@@ -75,6 +111,8 @@ export default function FormSignin() {
             setOtp(e.target.value);
           }}
           onSubmit={handleSubmit}
+          onKeyDown={handleKeyDown}
+          disabled={isLoading}
         />
       ) : (
         <>
@@ -85,6 +123,7 @@ export default function FormSignin() {
             name="firstName"
             placeholder="First name here"
             onChange={handleChange}
+            disabled={isLoading}
           />
           <TextInput
             label={"Last Name"}
@@ -93,6 +132,7 @@ export default function FormSignin() {
             value={form.lastName}
             placeholder="First name here"
             onChange={handleChange}
+            disabled={isLoading}
           />
 
           <TextInput
@@ -100,8 +140,9 @@ export default function FormSignin() {
             type={"email"}
             name="email"
             value={form.email}
-            placeholder={"semina@bwa.com"}
+            placeholder={"Type your email here"}
             onChange={handleChange}
+            disabled={isLoading}
           />
 
           <TextInput
@@ -111,6 +152,7 @@ export default function FormSignin() {
             name="password"
             placeholder="Type your password"
             onChange={handleChange}
+            disabled={isLoading}
           />
 
           <TextInput
@@ -119,13 +161,19 @@ export default function FormSignin() {
             value={form.role}
             name="role"
             placeholder="ex: Product Designer"
-            onChange={handleChange}
+              onChange={handleChange}
+              disabled={isLoading}
           />
         </>
       )}
 
       <div className="d-grid mt-2">
-        <Button variant={"btn-green"} action={() => handleSubmit()}>
+        <Button
+          variant={"btn-green"}
+          // onKeyDown={handleKeyDown}
+          action={() => handleSubmit()}
+          disabled={isLoading}
+        >
           {keyword === "code" ? "Verification" : "Sign Up"}
         </Button>
       </div>

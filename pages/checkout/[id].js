@@ -13,6 +13,9 @@ export default function Checkout({ detailPage }) {
   const router = useRouter();
   const ticketId = useSearchParams().get('ticketId')
 
+  // console.log('detailPage >>>>>>')
+  // console.log(detailPage)
+
   return (
     <>
       <Head>
@@ -31,7 +34,7 @@ export default function Checkout({ detailPage }) {
 
           <div className="event-details container d-flex flex-wrap justify-content-lg-center align-items-center gap-5">
             <img
-              src="/images/details-image.png"
+              src={`${process.env.NEXT_PUBLIC_API}/${detailPage.image.name}`}
               className="event-image"
               alt="semina"
             />
@@ -75,7 +78,6 @@ export default function Checkout({ detailPage }) {
 
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
-
   if (!token) {
     return {
       redirect: {
@@ -84,10 +86,11 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const req = await getData(`/api/v1/events/${context.params.id}`);
 
+  const req = await getData(`/api/v1/events/${context.params.id}`);
   const res = req.data;
+
   return {
-    props: { detailPage: res },
+    props: { detailPage: res},
   };
 }

@@ -171,7 +171,7 @@ export default function FormCheckout({ tickets }) {
               type="email"
               className="form-control"
               id="email_address"
-              placeholder="semina@bwa.com"
+              placeholder="Your Email"
               name="email"
               value={form.email}
               onChange={handleChange}
@@ -186,7 +186,7 @@ export default function FormCheckout({ tickets }) {
               type="text"
               className="form-control"
               id="role"
-              placeholder="Product Designer"
+              placeholder="Your Role"
               name="role"
               value={form.role}
               onChange={handleChange}
@@ -210,6 +210,9 @@ export default function FormCheckout({ tickets }) {
                   <img
                     src={`${process.env.NEXT_PUBLIC_API}/${payment.image.name}`}
                     alt=""
+                    width='40'
+                    height='40'
+                    // style={{borderRadius: '50%'}}
                   />
                   <div>{payment.type}</div>
                 </div>

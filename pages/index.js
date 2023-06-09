@@ -19,6 +19,7 @@ export default function Home({ data }) {
       <Header />
       <Brand />
       <CardEvent data={data} title="Featured Events" subTitle="Grow Today" />
+      <CardEvent data={data} title="Promo of June" subTitle="available Event" />
       <Stories />
       <Statistics />
       <Footer />

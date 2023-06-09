@@ -1,15 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 import moment from "moment";
 import Head from "next/head";
+import Link from "next/link";
 import Footer from "../../components/Footer";
 import FormCheckout from "../../components/FormCheckout";
 import Navbar from "../../components/Navbar";
 import { getData } from "../../utils/fetchData";
 import { formatDate } from "../../utils/formatDate";
-import {useRouter} from 'next/navigation'
+import {useRouter, usePathname} from 'next/navigation'
 
 
 export default function Dashboard({ data }) {
+
+  const router = useRouter()
+  const pathname = usePathname()
+
+
+
 
   return (
     <>
@@ -27,7 +34,8 @@ export default function Dashboard({ data }) {
         <div className="checkout container">
           <div className="text-center checkout-title">Invest In Yourself</div>
           <section className="d-flex flex-column justify-content-center align-items-center px-5">
-            {data.map((data) => (
+
+            {data.length > 0 ? data.map((data) => (
               <div
             
                 className="event-details container d-flex flex-wrap justify-content-lg-center align-items-center gap-5 border p-3 rounded"
@@ -55,7 +63,11 @@ export default function Dashboard({ data }) {
                   {data.totalPay === 0 ? "free" : `$ ${data.totalPay}`}
                 </div>
               </div>
-            ))}
+            )) : 
+              <Link href='/#grow-today' className="text-gradient-pink" style={{margin: '150px 0'}}>Checkout Now</Link>
+             }
+
+            
           </section>
         </div>
       </section>

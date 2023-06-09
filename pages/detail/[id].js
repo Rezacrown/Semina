@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
+import Image from "next/image";
 import Button from "../../components/Button";
 import CardEvent from "../../components/CardEvent";
 import Footer from "../../components/Footer";
@@ -17,6 +18,7 @@ import Cookies from "js-cookie";
 
 
 export default function DetailPage({ detailPage, id }) {
+
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +58,7 @@ export default function DetailPage({ detailPage, id }) {
 
       <div className="preview-image bg-navy text-center">
         <img
-          src="/images/details-image.png"
+          src={`${process.env.NEXT_PUBLIC_API}/${detailPage.image.name}`}
           className="img-content"
           alt="semina"
         />
@@ -158,6 +160,7 @@ export default function DetailPage({ detailPage, id }) {
       </div>
 
       <CardEvent data={data} title="Similiar Events" subTitle="Next One" />
+      <CardEvent data={data} title="Promo this June" subTitle="Tech Learning" />
       <Stories />
       <Statistics />
       <Footer />

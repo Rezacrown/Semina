@@ -55,13 +55,14 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div
             className={`navbar-nav ${
-              pathname !== "/signin" ? "mx-auto" : "ms-auto"
+              pathname !== "/signin" ? "ms-auto" : "ms-5"
             } my-3 my-lg-0`}
           >
             <NavLink href={"/"}>Home</NavLink>
-            <NavLink href={"/browse"}>Browse</NavLink>
+            <NavLink href={"#"}>Coming Soon Featured</NavLink>
+            {/* <NavLink href={"/browse"}>Browse</NavLink>
             <NavLink href={"/stories"}>Stories</NavLink>
-            <NavLink href={"/about"}>About</NavLink>
+            <NavLink href={"/about"}>About</NavLink> */}
           </div>
 
           {pathname !== "/signin" && (

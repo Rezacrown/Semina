@@ -57,7 +57,7 @@ export default function FormSignin() {
         type={"email"}
         name="email"
         value={form.email}
-        placeholder={"semina@bwa.com"}
+        placeholder={"Type Your Email"}
         onChange={handleChange}
       />
 
@@ -78,6 +78,7 @@ export default function FormSignin() {
         <Button action={() => router.push("/signup")} variant="btn-navy">
           Create New Account
         </Button>
+        <p className="text-gradient-pink" role="button" onClick={()=> router.push('/forgot-password')}>Forgot Password?</p>
       </div>
     </form>
   );
