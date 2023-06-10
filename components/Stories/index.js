@@ -6,7 +6,7 @@ export default function Stories() {
     <section className="stories bg-white">
       <div className="d-flex flex-row justify-content-center align-items-center container">
         <img
-          src="/images/story.png"
+          src="/images/story.webp"
           alt="semina"
           className="d-none d-lg-block"
           width="515"

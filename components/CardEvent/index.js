@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, {Suspense} from "react";
 import CardTitle from "../CardTitle";
 import Link from "next/link";
 import { formatDate } from "../../utils/formatDate";
+import SkeletonLoading from '../../utils/skeletonLoading';
+import Skeleton from "react-loading-skeleton";
 
 
 export default function CardEvent({ data, title, subTitle }) {
@@ -15,6 +17,7 @@ export default function CardEvent({ data, title, subTitle }) {
         <CardTitle title={title} subTitle={subTitle} />
         <div className="mt-5 row gap">
           
+          <Suspense fallback={<Skeleton count={50}/>}>
           {data.map((data, index) => (
             <div className="col-lg-3 col-md-6 col-12" key={index}>
               <div className="card-grow h-100">
@@ -37,9 +40,11 @@ export default function CardEvent({ data, title, subTitle }) {
                   
                 </div>
                   </Link>
-              </div>
+              </div> 
             </div>
           ))}
+          </Suspense>
+
         </div>
       </div>
     </section>

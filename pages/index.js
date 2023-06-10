@@ -1,3 +1,5 @@
+import React, {Suspense} from 'react';
+
 import Head from "next/head";
 import Brand from "../components/Brand";
 import CardEvent from "../components/CardEvent";
@@ -6,6 +8,7 @@ import Header from "../components/Headers";
 import Statistics from "../components/Statistics";
 import Stories from "../components/Stories";
 import { getData } from "../utils/fetchData";
+import SkeletonLoading from "../utils/skeletonLoading";
 
 export default function Home({ data }) {
   return (
@@ -20,8 +23,10 @@ export default function Home({ data }) {
       <Brand />
       <CardEvent data={data} title="Featured Events" subTitle="Grow Today" />
       <CardEvent data={data} title="Promo of June" subTitle="available Event" />
+
       <Stories />
       <Statistics />
+
       <Footer />
     </>
   );
